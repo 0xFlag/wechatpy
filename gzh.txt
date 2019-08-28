@@ -1,0 +1,55 @@
+微信公众号学习过程
+
+API未调用测试：
+https://www.apiopen.top/api.html#c14353b903984e699c31c08f639baaff
+https://www.heweather.com/（需要key放弃）
+
+API已调用：
+天气：
+https://www.tianqiapi.com/?action=v1
+https://www.tianqiapi.com/?action=v6
+
+vps部署
+Debian部署python3+flask+uwsgi+Nginx+Supervisor
+https://www.cnblogs.com/yangyuexiong/p/7825306.html
+这里踩坑了，十、配置 uwsgi  开始出了毛病，网上教程就是丢三落四
+
+参考代码
+https://github.com/dengfaheng/WeChatCode
+https://github.com/loveQt/wxpytest
+
+微信公众平台Token验证与接口请求验签：
+要想和微信公众号平台对接就要验证Token（类似令牌，自定义）
+另外说下踩坑点：
+URL填写你服务器IP或者域名（只支持80和443端口）
+Token 根据提示自定义填写
+EncodingAESKey随机生成，也可以代码里验证，我这没有验证随机就好
+消息加解密方式 就明文模式
+
+Python3接入微信公众号Token验证
+https://www.bilibili.com/video/av51707528/?p=5
+
+手把手教你用图灵机器人做微信公众号自动回复助手（这个教程很好）
+https://www.weiweiblog.cn/tuling_flask/
+
+从零开始 Python 微信公众号开发（代码分开结构，很给干净）
+http://ddrv.cn/a/290209/
+
+开发流程：
+1.微信公众号注册
+
+2.VPS
+我用的是Debian（Ubuntu也行）
+我看有个教程为了免费架设在新浪云那，又要注册绑手机我真服了（不过不费钱）
+配置不用太好，最低端基础就行了
+
+3.验证Token，实现对接
+这个我参考了
+https://www.bilibili.com/video/av51707528/?p=5
+https://www.weiweiblog.cn/tuling_flask/
+每个人写法不同，挺花哨的
+
+4.实现对接后就可以写功能了
+
+吐槽点：
+网上有些发布的教程都是原作者那偷的，复制粘贴都不会，漏代码漏标点，真的没话说，还有写搞的花里胡哨的，说实话没啥用，个人订阅号限制的权限也多还不能认证，没什么很大的意义所在，还有那些API调用，我日你妈哟，百度腾讯高德什么的调用个API都要上传个身份证绑个手机号，还有买个VPS也是阿里云腾讯云

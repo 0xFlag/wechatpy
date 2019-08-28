@@ -1,0 +1,71 @@
+VMware Ubuntu Python3（虚拟机下测试，VPS安装也是这样一般都默认安装了）
+pip安装
+1.先安装pip
+sudo apt-get install python3-pip
+
+2.安装后看下版本
+pip3 --version
+
+3.升级pip（建议不用升级）
+python3 -m pip install --upgrade pip
+
+4.升级后会有个bug
+Traceback (most recent call last):
+  File "/usr/bin/pip3", line 9, in <module>
+    from pip import main
+ImportError: cannot import name 'main'
+
+5.修复方法
+sudo vi /usr/bin/pip3
+from pip import main 修改为：
+from pip._internal import main
+
+安装虚拟环境（VPS）
+（VMware下安装了运行测试文件后无法访问，虚拟机觉得可以直接安装flask）
+1.安装虚拟环境
+pip3 install virtualenv
+
+2.创建工程文件夹（myproject自定义文件夹）
+cd /var/www/ （建议创建在这） 
+mkdir myproject
+
+3.创建后进入
+cd myproject
+
+3.新建虚拟环境
+virtualenv venv
+
+4.启动虚拟环境
+source venv/bin/activate
+
+5.在虚环境中安装flask
+pip3 install flask
+
+6.创建启动文件
+sudo vi run.py
+
+（运行和创建还有python库都在虚拟环境操作）
+deactivate 退出虚环境
+
+测试代码
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def hello():
+     return "Hello World!"
+if __name__ == "__main__":
+     app.run(host='0.0.0.0', port=80)
+
+不用uwsgi+Nginx+Supervisor
+用nohup
+后台运行不能少&
+sudo nohup python3 run.py &
+回车后会返回进程的PID
+[1] 2970
+至于结束进程PID不用多说了
+
+
+关于vi编辑器方向键和退格键失灵修复
+sudo vi /etc/vim/vimrc.tiny
+set nocompatible
+set backspace=2
